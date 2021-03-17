@@ -53,7 +53,7 @@ public:
 			steady_clock::time_point t1 = steady_clock::now();
 
 			unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
-			std::shuffle(train.begin(), train.end(), std::default_random_engine(seed));
+			std::shuffle(train.begin(), train.end(), std::default_random_engine(seed));  //随机排列
 			for (int j= 0; j < train.size();j=j + bach_size)
 			{
 				if (j <= train.size() - 50)
@@ -107,6 +107,7 @@ public:
 		//Eigen::RowVectorXd
 		for (int i = 0; i < bach.size(); ++i)
 		{
+			//前向计算，返回nabla_w,nabla_b,nabla_x
 			delta_nabla_w_b_x = backprop(bach[i]);
 
 			delta_nabla_w = std::move(std::get<0>(delta_nabla_w_b_x));
